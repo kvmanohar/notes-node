@@ -15,15 +15,21 @@ var command = argv._[0];
 
 if (command === 'add'){
    var note = notes.addNote(argv.title, argv.body);
-   if (typeof note === "undefined"){
-       console.log('Duplicate note. Note not added to the file!');
-   } else {
+   if (note){
        console.log(note.title, 'added successfully');
+   } else {
+       console.log('Duplicate note. Note not added to the file!');  
    }
 } else if (command === 'list') {
     notes.getAll();
 } else if (command === 'read'){
-    notes.getNote(argv.title);
+    var note = notes.getNote(argv.title);
+    if (note){
+        console.log('Title: ',note.title);
+        console.log('Body: ',note.body);
+    } else{
+        console.log('Note title not found.');
+    }
 } else if (command === 'remove'){
     notes.removeNote(argv.title);
 } else {

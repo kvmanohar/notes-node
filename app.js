@@ -1,5 +1,3 @@
-console.log('Starting App');
-
 //3rd party modules
 const fs = require('fs');
 const _ = require("lodash");
@@ -20,8 +18,12 @@ if (command === 'add'){
    } else {
        console.log('Duplicate note. Note not added to the file!');  
    }
+
 } else if (command === 'list') {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log('Printing',allNotes.length, 'note(s).');
+    allNotes.forEach((note) => console.log(note.title));
+
 } else if (command === 'read'){
     var note = notes.getNote(argv.title);
     if (note){
@@ -30,8 +32,10 @@ if (command === 'add'){
     } else{
         console.log('Note title not found.');
     }
+
 } else if (command === 'remove'){
     notes.removeNote(argv.title);
+
 } else {
     console.log('Command not recognised');
 }
